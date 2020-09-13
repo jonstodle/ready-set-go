@@ -9,7 +9,12 @@ import (
 func hello(w http.ResponseWriter, r *http.Request) {
 	var segments = strings.Split(r.URL.Path, "/")[2:]
 
-	json.NewEncoder(w).Encode(segments)
+	json.NewEncoder(w).Encode(struct {
+		Greeting string `json:"greeting"`
+		Names []string `json:"names"`
+	}{
+		"Hello", segments,
+	})
 }
 
 func main() {
