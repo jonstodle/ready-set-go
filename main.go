@@ -1,13 +1,14 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
 	"strings"
 )
 
 func main() {
-	args := os.Args[1:]
+	symbol := flag.String("symbol", "!", "The trailing symbol of the greeting")
+	flag.Parse()
 
-	fmt.Printf("Hello %v!", strings.Join(args, ", "))
+	fmt.Printf("Hello %v%v", strings.Join(flag.Args(), ", "), *symbol)
 }
