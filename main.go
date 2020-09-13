@@ -1,15 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 	"strings"
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	var segments = strings.Split(r.URL.Path, "/")
+	var segments = strings.Split(r.URL.Path, "/")[2:]
 
-	fmt.Fprintf(w, "Hello %v!", segments[len(segments) - 1])
+	json.NewEncoder(w).Encode(segments)
 }
 
 func main() {
